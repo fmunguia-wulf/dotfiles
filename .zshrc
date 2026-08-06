@@ -3,13 +3,14 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# --- Machine-specific overlay (first: sets up PATH, e.g. brew shellenv, ------
+# --- so the portable core's `command -v` tool checks below see it) -----------
+[[ "$(uname)" == "Darwin" && -f ~/dotfiles/zsh/10-mac.zsh ]] && source ~/dotfiles/zsh/10-mac.zsh
+[[ "$(uname)" == "Linux" && -f ~/dotfiles/zsh/10-linux.zsh ]] && source ~/dotfiles/zsh/10-linux.zsh
+
 # --- Portable core, same on every machine -----------------------------------
 source ~/dotfiles/shared.sh
 source ~/dotfiles/zsh/00-core.zsh
-
-# --- Machine-specific overlay -------------------------------------------------
-[[ "$(uname)" == "Darwin" && -f ~/dotfiles/zsh/10-mac.zsh ]] && source ~/dotfiles/zsh/10-mac.zsh
-[[ "$(uname)" == "Linux" && -f ~/dotfiles/zsh/10-linux.zsh ]] && source ~/dotfiles/zsh/10-linux.zsh
 
 # --- Powerlevel10k ---------------------------------------------------------
 if [[ -f ~/src/powerlevel10k/powerlevel10k.zsh-theme ]]; then
