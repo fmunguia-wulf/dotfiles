@@ -1,0 +1,14 @@
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[user]
+	name = Francisco Munguia-Wulftange
+	email = fmunguiawulftange@ucsd.edu
+[core]
+	excludesfile = ~/.gitignore_global
+[credential]
+	helper = osxkeychain
+[merge]
+	conflictstyle = diff3

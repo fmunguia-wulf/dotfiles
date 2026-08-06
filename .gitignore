@@ -1,0 +1,5 @@
+nvim/
+.DS_Store
+*.backup
+*.backup.*
+local.sh

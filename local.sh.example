@@ -1,0 +1,7 @@
+# Copy this to local.sh (gitignored) for anything machine-specific that
+# should never be committed: cluster tokens/allocation IDs, per-host paths,
+# API keys. shared.sh sources local.sh automatically if it exists.
+#
+# cp local.sh.example local.sh
+
+# export SOME_CLUSTER_TOKEN="..."
