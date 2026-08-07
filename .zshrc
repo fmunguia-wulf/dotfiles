@@ -7,6 +7,7 @@ fi
 # --- so the portable core's `command -v` tool checks below see it) -----------
 [[ "$(uname)" == "Darwin" && -f ~/dotfiles/zsh/10-mac.zsh ]] && source ~/dotfiles/zsh/10-mac.zsh
 [[ "$(uname)" == "Linux" && -f ~/dotfiles/zsh/10-linux.zsh ]] && source ~/dotfiles/zsh/10-linux.zsh
+[[ "$(hostname)" == *omega* && -f ~/dotfiles/omega.sh ]] && source ~/dotfiles/omega.sh
 
 # --- Portable core, same on every machine -----------------------------------
 source ~/dotfiles/shared.sh
@@ -25,3 +26,10 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # zsh-only convenience
 alias src="source ~/.zshrc"
+
+# >>> juliaup initialize >>>
+# !! Contents within this block are managed by juliaup !!
+path=('/home/munguia/.juliaup/bin' $path)
+export PATH
+[ -f "/home/munguia/.julia/juliaup/completions/zsh.zsh" ] && source "/home/munguia/.julia/juliaup/completions/zsh.zsh"
+# <<< juliaup initialize <<<

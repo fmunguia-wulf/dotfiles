@@ -41,3 +41,10 @@ fi
 
 # --- Local, machine-specific overrides (gitignored, see local.sh.example) --
 [ -f "$HOME/dotfiles/local.sh" ] && . "$HOME/dotfiles/local.sh"
+
+# --- Safety + ls fallback (universal, not eza-dependent) -------------------
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+command -v eza &>/dev/null || alias ls='ls --color=auto'
+command -v eza &>/dev/null || alias ll='ls -lh --color=auto'
