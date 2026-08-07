@@ -28,7 +28,7 @@ alias tl="tmux ls"
 
 # --- Better aliases (guarded -- no-op if tool is absent) ----------------
 command -v eza    &>/dev/null && alias ls='eza --icons' && alias ll='eza --icons -la'
-command -v bat    &>/dev/null && alias cat='bat'
+command -v bat    &>/dev/null && alias cat='bat --paging=never'
 command -v rg     &>/dev/null && alias grep='rg'
 command -v btop   &>/dev/null && alias top='btop'
 command -v zoxide &>/dev/null && eval "$(zoxide init "$(basename "$SHELL")")"
