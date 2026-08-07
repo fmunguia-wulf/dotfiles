@@ -8,6 +8,7 @@ fi
 [[ "$(uname)" == "Darwin" && -f ~/dotfiles/zsh/10-mac.zsh ]] && source ~/dotfiles/zsh/10-mac.zsh
 [[ "$(uname)" == "Linux" && -f ~/dotfiles/zsh/10-linux.zsh ]] && source ~/dotfiles/zsh/10-linux.zsh
 [[ "$(hostname)" == *omega* && -f ~/dotfiles/omega.sh ]] && source ~/dotfiles/omega.sh
+[[ -n "$NERSC_HOST" && -f ~/dotfiles/nersc.sh ]] && source ~/dotfiles/nersc.sh
 
 # --- Portable core, same on every machine -----------------------------------
 source ~/dotfiles/shared.sh
