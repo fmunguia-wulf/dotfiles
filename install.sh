@@ -22,6 +22,7 @@ link .zshrc
 link .p10k.zsh
 link .zprofile
 link .bashrc
+link .bash_profile
 link .gitconfig
 
 if [ "$(uname)" = "Darwin" ]; then

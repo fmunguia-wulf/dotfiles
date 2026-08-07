@@ -3,3 +3,4 @@ nvim/
 *.backup
 *.backup.*
 local.sh
+.bash_profile.local
