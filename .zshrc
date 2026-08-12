@@ -29,8 +29,12 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 alias src="source ~/.zshrc"
 
 # >>> juliaup initialize >>>
+
 # !! Contents within this block are managed by juliaup !!
-path=('/home/munguia/.juliaup/bin' $path)
+
+path=('/Users/patxi/.juliaup/bin' $path)
 export PATH
-[ -f "/home/munguia/.julia/juliaup/completions/zsh.zsh" ] && source "/home/munguia/.julia/juliaup/completions/zsh.zsh"
+# Tab completion for juliaup and julia channel selection
+[ -f "/Users/patxi/.julia/juliaup/completions/zsh.zsh" ] && source "/Users/patxi/.julia/juliaup/completions/zsh.zsh"
+
 # <<< juliaup initialize <<<

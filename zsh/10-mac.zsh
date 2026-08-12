@@ -39,9 +39,19 @@ export GACODE_PLATFORM=OSX_SEQUOIA
 export GACODE_ROOT=$HOME/src/gacode
 
 # --- Compilers ---------------------------------------------------------------
-export CC=/opt/homebrew/bin/gcc-15
-export CXX=/opt/homebrew/bin/g++-15
-export FC=/opt/homebrew/bin/gfortran-15
+# Resolve the newest Homebrew gcc/g++/gfortran rather than hardcoding a
+# version, since `brew upgrade gcc` bumps the versioned binary name.
+if command -v brew &>/dev/null; then
+    __brew_prefix="$(brew --prefix)"
+    __gcc_bin=$(ls -1 "$__brew_prefix"/bin/gcc-[0-9]* 2>/dev/null | grep -Ev -- '-ar-|-nm-|-ranlib-' | sort -V | tail -1)
+    if [ -n "$__gcc_bin" ]; then
+        __gcc_version="${__gcc_bin##*-}"
+        export CC="$__gcc_bin"
+        export CXX="$__brew_prefix/bin/g++-$__gcc_version"
+        export FC="$__brew_prefix/bin/gfortran-$__gcc_version"
+    fi
+    unset __brew_prefix __gcc_bin __gcc_version
+fi
 
 # --- Mac-only aliases --------------------------------------------------------
 alias omfit="~/src/omfit-source/bin/omfit_docker_osx.sh"

@@ -10,13 +10,18 @@ source ~/dotfiles/bash/00-core.bash
 alias src="source ~/.bashrc"
 
 # >>> juliaup initialize >>>
+
 # !! Contents within this block are managed by juliaup !!
+
 case ":$PATH:" in
-    *:/home/munguia/.juliaup/bin:*)
+    *:/Users/patxi/.juliaup/bin:*)
         ;;
+
     *)
-        export PATH=/home/munguia/.juliaup/bin${PATH:+:${PATH}}
+        export PATH=/Users/patxi/.juliaup/bin${PATH:+:${PATH}}
         ;;
 esac
-[ -f "/home/munguia/.julia/juliaup/completions/bash.sh" ] && source "/home/munguia/.julia/juliaup/completions/bash.sh"
+# Tab completion for juliaup and julia channel selection
+[ -f "/Users/patxi/.julia/juliaup/completions/bash.sh" ] && source "/Users/patxi/.julia/juliaup/completions/bash.sh"
+
 # <<< juliaup initialize <<<

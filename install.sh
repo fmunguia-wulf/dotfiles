@@ -31,6 +31,12 @@ if [ "$(uname)" = "Darwin" ]; then
     mkdir -p ~/Library/Fonts
     cp "$DOTFILES"/fonts/*.ttf ~/Library/Fonts/
     command -v brew &>/dev/null && brew install --cask font-mononoki-nerd-font 2>/dev/null || true
+
+    if command -v brew &>/dev/null; then
+        echo ""
+        echo "Installing CLI tools..."
+        brew install fzf eza bat ripgrep btop zoxide powerlevel10k
+    fi
 elif command -v fc-cache &>/dev/null; then
     # Linux desktop (Cybele via NoMachine, etc.) -- headless cluster nodes
     # have no fc-cache and skip this harmlessly.
