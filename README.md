@@ -1,6 +1,6 @@
 # dotfiles
 
-My shell config. Symlinked into `$HOME` so this repo is the source of truth.
+My shell config symlinked into `$HOME` 
 
 ## Layout
 
