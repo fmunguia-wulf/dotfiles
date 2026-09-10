@@ -43,7 +43,11 @@ unset _dotfiles_no_icons
 command -v bat    &>/dev/null && alias cat='bat --paging=never'
 command -v rg     &>/dev/null && alias grep='rg'
 command -v btop   &>/dev/null && alias top='btop'
-command -v zoxide &>/dev/null && eval "$(zoxide init "$(basename "$SHELL")")"
+# $SHELL is the login shell, not necessarily this process (e.g. after the
+# MATE-detection exec in .zshrc hands off zsh -> bash) -- ask the running
+# process directly instead. ps -o comm= can carry a login-shell leading
+# "-" (macOS does; Linux's /proc-backed comm usually doesn't), strip it.
+command -v zoxide &>/dev/null && eval "$(zoxide init "$(ps -p $$ -o comm= | sed 's/^-//')")"
 
 # --- juliaup -------------------------------------------------------------
 if [ -d "$HOME/.juliaup/bin" ]; then
