@@ -1,3 +1,26 @@
+# On MATE desktops (e.g. NERSC ThinLinc's remote desktop), MATE Terminal
+# doesn't discover Nerd Fonts no matter where they're installed or how
+# fontconfig is refreshed -- p10k's glyphs just render as boxes. Bail into
+# the plain bash fallback prompt instead of fighting it. Must run before
+# the p10k instant-prompt block below, so nothing zsh-specific gets a
+# chance to print first.
+#
+# ThinLinc's MATE Terminal auto-SSHes into a login node, so none of the
+# usual desktop-session env vars (XDG_CURRENT_DESKTOP, VTE_VERSION, ...)
+# survive the hop -- confirmed empty on the actual NERSC session. The one
+# thing sshd sets from the real TCP connection (not client-forwarded, so
+# it can't be scrubbed) is $SSH_CONNECTION's client IP, which lands in
+# NERSC's own 128.55.0.0/16 block when it's ThinLinc rather than an
+# external Mac. Fragile if that range ever changes, or if a NERSC VPN
+# session happens to land in the same block -- worth rechecking if this
+# ever misfires.
+_ssh_client_ip="${SSH_CONNECTION%% *}"
+if [[ -o interactive ]] && { [[ "${XDG_CURRENT_DESKTOP:-}" == *[Mm][Aa][Tt][Ee]* ]] || [[ -n "$MATE_DESKTOP_SESSION_ID" ]] || [[ "${DESKTOP_SESSION:-}" == *mate* ]] || [[ "$_ssh_client_ip" == 128.55.* ]]; }; then
+    unset _ssh_client_ip
+    exec bash -l
+fi
+unset _ssh_client_ip
+
 # Enable Powerlevel10k instant prompt. Must stay at the top.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"

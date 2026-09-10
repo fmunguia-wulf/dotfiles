@@ -27,7 +27,19 @@ alias tn="tmux new -s"
 alias tl="tmux ls"
 
 # --- Better aliases (guarded -- no-op if tool is absent) ----------------
-command -v eza    &>/dev/null && alias ls='eza --icons' && alias ll='eza --icons -la'
+# NERSC ThinLinc's MATE Terminal (source IP in NERSC's own 128.55.0.0/16,
+# see .zshrc) can't render Nerd Font icon glyphs -- fall back to eza
+# without --icons there instead of boxes-for-characters.
+case "${SSH_CONNECTION%% *}" in
+    128.55.*) _dotfiles_no_icons=1 ;;
+    *) _dotfiles_no_icons=0 ;;
+esac
+if [ "$_dotfiles_no_icons" = 1 ]; then
+    command -v eza &>/dev/null && alias ls='eza' && alias ll='eza -la'
+else
+    command -v eza &>/dev/null && alias ls='eza --icons' && alias ll='eza --icons -la'
+fi
+unset _dotfiles_no_icons
 command -v bat    &>/dev/null && alias cat='bat --paging=never'
 command -v rg     &>/dev/null && alias grep='rg'
 command -v btop   &>/dev/null && alias top='btop'
