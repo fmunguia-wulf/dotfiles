@@ -15,8 +15,9 @@
 # session happens to land in the same block -- worth rechecking if this
 # ever misfires.
 _ssh_client_ip="${SSH_CONNECTION%% *}"
-if [[ -o interactive ]] && { [[ "${XDG_CURRENT_DESKTOP:-}" == *[Mm][Aa][Tt][Ee]* ]] || [[ -n "$MATE_DESKTOP_SESSION_ID" ]] || [[ "${DESKTOP_SESSION:-}" == *mate* ]] || [[ "$_ssh_client_ip" == 128.55.* ]]; }; then
+if [[ -z "$DOTFILES_FORCE_BASH" ]] && [[ -o interactive ]] && { [[ "${XDG_CURRENT_DESKTOP:-}" == *[Mm][Aa][Tt][Ee]* ]] || [[ -n "$MATE_DESKTOP_SESSION_ID" ]] || [[ "${DESKTOP_SESSION:-}" == *mate* ]] || [[ "$_ssh_client_ip" == 128.55.* ]]; }; then
     unset _ssh_client_ip
+    export DOTFILES_FORCE_BASH=1
     exec bash -l
 fi
 unset _ssh_client_ip

@@ -8,11 +8,12 @@
 # so anything it exports still carries over via the exec into the new process.
 [ -f "$HOME/.bash_profile.local" ] && . "$HOME/.bash_profile.local"
 
-if [ -z "$ZSH_VERSION" ] && [ -t 0 ]; then
+if [ -z "$ZSH_VERSION" ] && [ -t 0 ] && [ -z "$DOTFILES_FORCE_BASH" ]; then
     if command -v zsh >/dev/null 2>&1; then
         exec zsh -l
     fi
 fi
+unset DOTFILES_FORCE_BASH
 
 source ~/dotfiles/shared.sh
 source ~/dotfiles/bash/00-core.bash
