@@ -25,3 +25,8 @@ alias qall='squeue -u $USER --start'
 # system. Bootstrap it directly if missing, so module commands always work
 # regardless of how the shell was spawned.
 command -v module >/dev/null 2>&1 || source /opt/cray/pe/lmod/lmod/init/zsh
+
+# Neovim 0.12+ tries to auto-detect terminal background color via a DSR
+# query at startup; over SSH the round-trip is often too slow to get an
+# answer in time, producing a harmless "did not respond to DSR" warning.
+export NVIM_NOTTYFAST=1
